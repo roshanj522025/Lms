@@ -8,10 +8,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:text="@string/app_name"
-        android:textColor="#FFFFFF"
-        android:textSize="28sp"
-        android:textStyle="bold" />
+        android:text="♞ lichess"
+        android:textColor="#759900"
+        android:textSize="36sp"
+        android:textStyle="bold"
+        android:fontFamily="sans-serif-light" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -19,8 +20,8 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="32dp"
-        android:text="Learning Management System"
-        android:textColor="#CCFFFFFF"
-        android:textSize="14sp" />
+        android:text="Free. No ads. Open source."
+        android:textColor="#88FFFFFF"
+        android:textSize="13sp" />
 
 </RelativeLayout>

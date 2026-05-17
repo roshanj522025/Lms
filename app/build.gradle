@@ -3,11 +3,11 @@ plugins {
 }
 
 android {
-    namespace 'com.kristujayantiexamlms'
+    namespace 'com.lichess'
     compileSdk 34
 
     defaultConfig {
-        applicationId "com.kristujayantiexamlms"
+        applicationId "com.lichess"
         minSdk 21
         targetSdk 34
         versionCode 1
@@ -18,7 +18,6 @@ android {
         release {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            // APK is unsigned – sign manually via Android Studio or apksigner
         }
         debug {
             applicationIdSuffix ".debug"

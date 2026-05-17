@@ -1,4 +1,4 @@
-package com.kristujayantiexamlms;
+package com.lichess;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -20,7 +20,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final String HOME_URL = "https://www.kristujayantiexamlms.com/login/forgot_password.php";
+    private static final String HOME_URL = "https://lichess.org";
 
     private WebView webView;
     private ProgressBar progressBar;
@@ -36,7 +36,6 @@ public class MainActivity extends AppCompatActivity {
         progressBar        = findViewById(R.id.progressBar);
         swipeRefreshLayout = findViewById(R.id.swipeRefreshLayout);
 
-        // ── WebView settings ──────────────────────────────────────────────
         WebSettings settings = webView.getSettings();
         settings.setJavaScriptEnabled(true);
         settings.setDomStorageEnabled(true);
@@ -47,24 +46,20 @@ public class MainActivity extends AppCompatActivity {
         settings.setSupportZoom(true);
         settings.setAllowFileAccess(true);
         settings.setCacheMode(WebSettings.LOAD_DEFAULT);
-        settings.setMixedContentMode(WebSettings.MIXED_CONTENT_COMPATIBILITY_MODE);
-        settings.setUserAgentString(settings.getUserAgentString()
-                + " KristuJayantiLMSApp/1.0");
+        settings.setMediaPlaybackRequiresUserGesture(false); // for board sounds/video
+        settings.setUserAgentString(settings.getUserAgentString() + " LichessApp/1.0");
 
-        // Cookies
         CookieManager.getInstance().setAcceptCookie(true);
         CookieManager.getInstance().setAcceptThirdPartyCookies(webView, true);
 
-        // ── WebViewClient ─────────────────────────────────────────────────
         webView.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
                 String url = request.getUrl().toString();
-                if (url.startsWith("https://www.kristujayantiexamlms.com")
-                        || url.startsWith("http://www.kristujayantiexamlms.com")) {
-                    return false; // load inside WebView
+                // Keep lichess and its subdomains inside the WebView
+                if (url.contains("lichess.org")) {
+                    return false;
                 }
-                // Open external links in the browser
                 startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
                 return true;
             }
@@ -80,11 +75,10 @@ public class MainActivity extends AppCompatActivity {
             public void onReceivedError(WebView view, int errorCode,
                                         String description, String failingUrl) {
                 Toast.makeText(MainActivity.this,
-                        "Network error – check your connection", Toast.LENGTH_SHORT).show();
+                        "No connection – check your internet", Toast.LENGTH_SHORT).show();
             }
         });
 
-        // ── WebChromeClient (progress bar) ────────────────────────────────
         webView.setWebChromeClient(new WebChromeClient() {
             @Override
             public void onProgressChanged(WebView view, int newProgress) {
@@ -97,10 +91,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // ── Pull-to-refresh ───────────────────────────────────────────────
         swipeRefreshLayout.setOnRefreshListener(() -> webView.reload());
 
-        // ── Load URL ──────────────────────────────────────────────────────
         if (savedInstanceState != null) {
             webView.restoreState(savedInstanceState);
         } else {
@@ -108,7 +100,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    // ── Back navigation ───────────────────────────────────────────────────
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK && webView.canGoBack()) {

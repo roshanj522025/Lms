@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="Theme.KristuJayantiLMS" parent="Theme.MaterialComponents.Light.NoActionBar">
+    <style name="Theme.Lichess" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryVariant">@color/colorPrimaryDark</item>
         <item name="colorOnPrimary">@color/white</item>
         <item name="colorSecondary">@color/colorAccent</item>
         <item name="android:statusBarColor">@color/colorPrimaryDark</item>
-        <item name="android:windowBackground">@color/white</item>
+        <item name="android:windowBackground">@color/colorPrimary</item>
     </style>
 
-    <style name="Theme.KristuJayantiLMS.Splash" parent="Theme.KristuJayantiLMS">
+    <style name="Theme.Lichess.Splash" parent="Theme.Lichess">
         <item name="android:windowBackground">@color/colorPrimary</item>
         <item name="android:statusBarColor">@color/colorPrimary</item>
     </style>
